@@ -80,14 +80,12 @@ func (j *jsonFormatter) Write(w io.Writer, r *schedule.Report) error {
 	return enc.Encode(out)
 }
 
+// formatTimes formats a slice of times as a comma-separated string of RFC3339 values.
 func formatTimes(times []time.Time) string {
-	parts := make([]string, len(times))
-	for i, t := range times {
-		parts[i] = t.Format(time.RFC3339)
-	}
-	return strings.Join(parts, ", ")
+	return strings.Join(formatTimesSlice(times), ", ")
 }
 
+// formatTimesSlice formats a slice of times as a slice of RFC3339 strings.
 func formatTimesSlice(times []time.Time) []string {
 	parts := make([]string, len(times))
 	for i, t := range times {
